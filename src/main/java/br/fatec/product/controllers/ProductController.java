@@ -46,7 +46,6 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 
-    @SuppressWarnings("null")
     @PostMapping()
     public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
         Product newProduct = service.save(product);
