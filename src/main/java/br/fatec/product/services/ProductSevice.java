@@ -11,6 +11,7 @@ import br.fatec.product.entities.Product;
 import br.fatec.product.mappers.ProductMapper;
 import br.fatec.product.repositoties.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
+import main.java.br.fatec.product.dtos.ProductResquest;
 
 @Service
 public class ProductSevice {
@@ -36,15 +37,17 @@ public class ProductSevice {
         }
     }
 
-    public Product save(Product product) {
-        return repository.save(product);
+    public Product save(ProductResquest product) {
+        Product newProduct = repository.save(ProductMapper.toEntity(product));
+        return ProductMapper.toDTO(newProduct);
     }
 
-    public void update(Product product, long id) {
+    public void update(ProductResquest product, long id) {
         Product aux = repository.getReferenceById(id);
-        aux.setCategory(product.getCategory());
-        aux.setName(product.getName());
-        aux.setPrice(product.getPrice());
+
+        aux.setCategory(product.Category());
+        aux.setName(product.Name());
+        aux.setPrice(product.Price());
 
         repository.save(aux);
 

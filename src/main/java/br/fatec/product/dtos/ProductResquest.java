@@ -1,10 +1,10 @@
-package br.fatec.product.dtos;
+package main.java.br.fatec.product.dtos;
 
-public record ProductResponse(
+public record ProductResquest (    
         long id,
         String name,
         double price,
         String category
-) {
+){
 
 }
