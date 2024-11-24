@@ -37,7 +37,7 @@ public class ProductSevice {
         }
     }
 
-    public Product save(ProductResquest product) {
+    public ProductResponse save(ProductResquest product) {
         Product newProduct = repository.save(ProductMapper.toEntity(product));
         return ProductMapper.toDTO(newProduct);
     }

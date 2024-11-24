@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.fatec.product.entities.Product;
+import br.fatec.product.dtos.ProductResponse;
+import br.fatec.product.dtos.ProductResquest;
 import br.fatec.product.services.ProductSevice;
+
 
 @RestController
 @RequestMapping("products")
@@ -41,13 +43,14 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> updateProduct(@PathVariable long id, @RequestBody Product product) {
+    public ResponseEntity<Void> updateProduct(@PathVariable long id, 
+                                              @Validated @RequestBody ProductResquest product) {
         service.update(product, id);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping()
-    public ResponseEntity<ProductResponse> saveProduct(@RequestBody Product product) {
+    public ResponseEntity<ProductResponse> saveProduct(@Validated @RequestBody ProductResquest product) {
         ProductResponse newProduct = service.save(product);
         return ResponseEntity.created(null).body(newProduct);
 
